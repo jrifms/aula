@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 
-static const char *CAMPUS_FILE = "campus.csv";
-static const char *CURSO_FILE = "curso.csv";
-static const char *ALUNO_FILE = "aluno.csv";
-static const char *PROF_FILE = "professor.csv";
+static const char *CAMPUS_FILE = "arquivos/campus.csv";
+static const char *CURSO_FILE = "arquivos/curso.csv";
+static const char *ALUNO_FILE = "arquivos/aluno.csv";
+static const char *PROF_FILE = "arquivos/professor.csv";
 
 void storage_init_file() {
     /* cria arquivos se não existirem */
@@ -43,7 +43,7 @@ void list_campuses_file() {
     printf("ID | Nome\n");
     while (fgets(line, sizeof(line), f)) {
         int id; char nome[NAME_MAX];
-        if (sscanf(line, "%d,%127[^"]", &id, nome) >= 1) {
+        if (sscanf(line, "%d,%127[^\\n]", &id, nome) >= 2) {
             printf("%d | %s\n", id, nome);
         }
     }
@@ -66,7 +66,7 @@ void list_cursos_file() {
     printf("ID | Nome | CampusID\n");
     while (fgets(line, sizeof(line), f)) {
         int id; char nome[NAME_MAX]; int campus_id;
-        if (sscanf(line, "%d,%127[^,],%d", &id, nome, &campus_id) >= 1) {
+        if (sscanf(line, "%d,%127[^,],%d", &id, nome, &campus_id) >= 3) {
             printf("%d | %s | %d\n", id, nome, campus_id);
         }
     }
@@ -89,7 +89,7 @@ void list_alunos_file() {
     printf("ID | Nome | CursoID\n");
     while (fgets(line, sizeof(line), f)) {
         int id; char nome[NAME_MAX]; int curso_id;
-        if (sscanf(line, "%d,%127[^,],%d", &id, nome, &curso_id) >= 1) {
+        if (sscanf(line, "%d,%127[^,],%d", &id, nome, &curso_id) >= 3) {
             printf("%d | %s | %d\n", id, nome, curso_id);
         }
     }
@@ -112,7 +112,7 @@ void list_professores_file() {
     printf("ID | Nome | CursoID\n");
     while (fgets(line, sizeof(line), f)) {
         int id; char nome[NAME_MAX]; int curso_id;
-        if (sscanf(line, "%d,%127[^,],%d", &id, nome, &curso_id) >= 1) {
+        if (sscanf(line, "%d,%127[^,],%d", &id, nome, &curso_id) >= 3) {
             printf("%d | %s | %d\n", id, nome, curso_id);
         }
     }
